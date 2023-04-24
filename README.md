@@ -25,3 +25,6 @@
 
 ## 使用素材
 - 使用検討中です
+
+## 実装機能リスト
+https://docs.google.com/spreadsheets/d/1q9hFD14N-Fhs2YUsIeZ-pDHsZDIcL6mBBlEqodiFogI/edit?usp=sharing
