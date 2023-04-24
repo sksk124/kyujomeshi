@@ -1,24 +1,27 @@
-# README
+# <球場飯>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+<球場飯に関する情報を集約することで、球場へ行く際の食事選びをサポートする、NPB(日本のプロ野球)の12球団本拠地の球場飯をレビューするサイト>
 
-Things you may want to cover:
+### テーマを選んだ理由
+<野球観戦の楽しみの一つが球場での食事であるため、球場飯の情報を事前に知りたいと考える人が多いと思ったため。各球場ごとに提供される食事の種類や味が異なり、球場ごとにレビューをまとめたサイトであれば、より的確な情報が得られると思ったため。>
 
-* Ruby version
+### ターゲットユーザ
+<野球観戦に行く人やスポーツイベントに参加する人など、球場の飲食物を利用する人たち>
 
-* System dependencies
+### 主な利用シーン
+<野球観戦前や観戦中の食事時間帯。球場によって提供される食べ物も異なるため、提供される食べ物の種類や味、価格、店舗の場所などを事前に確認したい場合。試合中に食べるものを決めたい時や、休憩時間に何を食べるか検討している場合>
 
-* Configuration
+## 設計書
 
-* Database creation
 
-* Database initialization
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- 使用検討中です
