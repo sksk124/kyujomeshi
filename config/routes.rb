@@ -6,6 +6,10 @@ devise_for :customers,skip: [:passwords], controllers: {
   sessions: 'public/sessions'
 }
 
+devise_scope :customers do
+    post 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
+  end
+
 # 管理者用
 # URL /admin/sign_in ...
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
