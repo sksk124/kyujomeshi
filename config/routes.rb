@@ -15,6 +15,22 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
 
 
+  namespace :admin do
+    resources :customers
+    resources :review
+    resources :ballparks
+    resources :comments
+  end
+
+
+  scope module: :public do
+    resources :customers
+    resources :review
+    resources :ballparks
+    resources :comments
+  end
+
+
 
 
 end
