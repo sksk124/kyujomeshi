@@ -1,2 +1,21 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<h3>会員情報編集</h3>
+
+<%= form_with model: @customer do |f| %>
+
+<%= f.text_field :last_name %>
+
+<%= f.text_field :first_name %>
+
+<%= f.text_field :last_name_kana %>
+
+<%= f.text_field :first_name_kana %>
+
+<%= f.text_field :nick_name %>
+
+<%= f.text_area :email %>
+
+<%= f.select :is_deleted, [['有効', false], ['退会済み', true]] %>
+
+<%= f.submit '保存' %>
+
+<% end %>
