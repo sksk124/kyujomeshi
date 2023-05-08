@@ -8,9 +8,10 @@
       <th>名</th>
       <th>姓カナ</th>
       <th>名カナ</th>
-       <th>ニックネーム</th>
+      <th>ニックネーム</th>
       <th>メールアドレス</th>
       <th>退会ステータス</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +25,7 @@
         <td><%= customer.nick_name %></td>
         <td><%= customer.email %></td>
         <td><%= customer.is_deleted ? '退会済み' : '有効' %></td>
+        <td><%= link_to '詳細', admin_customer_path(customer) %></td>
       </tr>
     <% end %>
   </tbody>
