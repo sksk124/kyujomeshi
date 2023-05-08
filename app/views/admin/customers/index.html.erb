@@ -1,0 +1,30 @@
+<h3>会員一覧</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>姓</th>
+      <th>名</th>
+      <th>姓カナ</th>
+      <th>名カナ</th>
+       <th>ニックネーム</th>
+      <th>メールアドレス</th>
+      <th>退会ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.id %></td>
+        <td><%= customer.last_name %></td>
+        <td><%= customer.first_name %></td>
+        <td><%= customer.last_name_kana %></td>
+        <td><%= customer.first_name_kana %></td>
+        <td><%= customer.nick_name %></td>
+        <td><%= customer.email %></td>
+        <td><%= customer.is_deleted ? '退会済み' : '有効' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
