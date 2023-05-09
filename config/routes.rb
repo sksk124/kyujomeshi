@@ -34,7 +34,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   scope module: :public do
     resources :customers
     resources :review
-    resources :ballparks
     resources :comments
   end
 

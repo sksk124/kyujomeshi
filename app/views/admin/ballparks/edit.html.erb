@@ -1,0 +1,9 @@
+<h3>会員情報編集</h3>
+
+<%= form_with model: @ballpark, url: admin_ballpark_path do |f| %>
+
+<%= f.text_field :name %>
+
+<%= f.submit '保存' %>
+
+<% end %>
