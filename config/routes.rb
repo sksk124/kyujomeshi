@@ -25,7 +25,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   namespace :admin do
     resources :customers
-    resources :review
+    resources :reviews
     resources :ballparks
     resources :comments
   end
@@ -33,7 +33,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   scope module: :public do
     resources :customers
-    resources :review
+    resources :reviews
     resources :comments
   end
 
