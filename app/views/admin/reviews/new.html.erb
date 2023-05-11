@@ -1,6 +1,10 @@
 <h3>レビュー投稿</h3>
 
 <%= form_with model: @review, url: reviews_path do |f| %>
+
+  <%= f.label :image %>
+  <%= f.file_field :image, accept: "image/*" %>
+
   <%= f.label :name %>
   <%= f.text_field :name %>
 
