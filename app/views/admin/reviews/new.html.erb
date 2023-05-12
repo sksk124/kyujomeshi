@@ -1,6 +1,6 @@
 <h3>レビュー投稿</h3>
 
-<%= form_with model: @review, url: reviews_path do |f| %>
+<%= form_with model: @review, url: admin_reviews_path do |f| %>
 
   <%= f.label :image %>
   <%= f.file_field :image, accept: "image/*" %>
@@ -12,7 +12,7 @@
   <%= f.number_field :price %>
 
   <%= f.label :rating %>
-  <%= f.number_field :rating %>
+  <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
 
   <%= f.label :thought %>
   <%= f.text_area :thought %>
