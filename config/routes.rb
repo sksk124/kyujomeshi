@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'homes/top'
+    get 'homes/about'
+  end
 # 顧客用
 # URL /customers/sign_in ...
 devise_for :customers,skip: [:passwords], controllers: {
@@ -23,14 +27,12 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :comments
   end
 
-
   scope module: :public do
+    resources :homes
     resources :customers
     resources :reviews
     resources :comments
   end
-
-
 
 
 end
