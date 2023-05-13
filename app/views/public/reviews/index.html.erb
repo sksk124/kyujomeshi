@@ -1,0 +1,32 @@
+<h3>レビュー一覧</h3>
+
+<%= link_to "球場飯を投稿する", new_review_path, class: "nav-link" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>画像</th>
+      <th>商品名</th>
+      <th>価格</th>
+      <th>評価</th>
+      <th>感想</th>
+      <th>投稿日時</th>
+      <th>ニックネーム</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.id %></td>
+        <td><%= image_tag review.image, size: "200x200" if review.image.attached? %></td>
+        <td><%= review.name %></td>
+        <td><%= review.price %></td>
+        <td><%= review.rating %></td>
+        <td><%= review.thought %></td>
+        <td><%= review.created_at %></td>
+        <td><%= review.customer.nick_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

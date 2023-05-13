@@ -1,0 +1,24 @@
+<h3>レビュー投稿</h3>
+
+<%= form_with model: @review, url: reviews_path do |f| %>
+
+  <%= f.label :ballpark_id %>
+  <%= f.collection_select(:ballpark_id, Ballpark.all, :id, :name) %>
+
+  <%= f.label :image %>
+  <%= f.file_field :image, accept: "image/*" %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :price %>
+  <%= f.number_field :price %>
+
+  <%= f.label :rating %>
+  <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
+
+  <%= f.label :thought %>
+  <%= f.text_area :thought %>
+
+  <%= f.submit '投稿' %>
+<% end %>
