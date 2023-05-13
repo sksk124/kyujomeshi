@@ -9,11 +9,17 @@ class Admin::ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)
-    @review.save
-     flash[:success] = 'レビューを投稿しました'
-     redirect_to admin_reviews_path
+   @review = Review.new(review_params)
+   if @review.save
+    flash[:success] = 'レビューを投稿しました'
+    redirect_to admin_reviews_path
+   else
+    flash.now[:danger] = 'レビューの投稿に失敗しました'
+    render :new
+   end
   end
+
+
 
   private
 
