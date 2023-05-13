@@ -29,7 +29,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
 
   scope module: :public do
-    resources :homes
     resources :customers
     resources :reviews
     resources :comments
