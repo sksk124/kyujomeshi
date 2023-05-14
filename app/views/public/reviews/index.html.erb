@@ -12,6 +12,7 @@
       <th>感想</th>
       <th>投稿日時</th>
       <th>ニックネーム</th>
+      <th>詳細</th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +25,7 @@
         <td><%= review.thought %></td>
         <td><%= review.created_at %></td>
         <td><%= review.customer.nick_name %></td>
+        <td><%= link_to "詳細", review_path(review), class: "btn btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>
