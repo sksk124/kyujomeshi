@@ -2,6 +2,9 @@
 
 <%= form_with model: @review, url: admin_reviews_path do |f| %>
 
+  <%= f.label :ballpark_id %>
+  <%= f.collection_select(:ballpark_id, Ballpark.all, :id, :name) %>
+
   <%= f.label :image %>
   <%= f.file_field :image, accept: "image/*" %>
 
