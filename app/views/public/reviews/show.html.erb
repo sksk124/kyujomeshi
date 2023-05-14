@@ -11,3 +11,5 @@
   <p><%= @review.customer.nick_name %>さんのレビュー</p>
   <p><%= @review.created_at.strftime("%Y/%m/%d %H:%M:%S") %>に投稿</p>
 </div>
+<%= link_to "レビューを編集", edit_review_path %>
+<%= link_to "レビューを削除", @review, method: :delete, "data-confirm" => "本当に削除しますか？" %>
