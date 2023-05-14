@@ -16,10 +16,10 @@
     <% @reviews.each do |review| %>
       <tr>
         <td><%= review.id %></td>
-        <td><%= image_tag review.image, size: "200x200" %></td>
+        <td><%= image_tag review.image, size: "200x200" if review.image.attached? %></td>
         <td><%= review.name %></td>
         <td><%= review.price %></td>
-        <td><%= review.rating %></td>
+        <td><%= star_rating(review.rating) %></td>
         <td><%= review.thought %></td>
         <td><%= review.created_at %></td>
       </tr>
