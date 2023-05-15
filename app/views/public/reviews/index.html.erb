@@ -2,6 +2,21 @@
 
 <%= link_to "球場飯を投稿する", new_review_path, class: "nav-link" %>
 
+
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <h4>球場一覧</h4>
+      <% @ballparks.each do |ballpark| %>
+        <li class="nav-item">
+          <%= ballpark.name %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+
 <table>
   <thead>
     <tr>

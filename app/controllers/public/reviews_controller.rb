@@ -3,6 +3,7 @@ class Public::ReviewsController < ApplicationController
 
   def index
     @reviews = Review.all
+    @ballparks = Ballpark.all
   end
 
   def show
