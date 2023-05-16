@@ -11,16 +11,35 @@
   </head>
 
   <body>
-    <% if customer_signed_in? %>
-     <%= link_to "投稿一覧", reviews_path, class: "nav-link" %>
-     <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link", data: { confirm: "ログアウトしますか？" } %>
-    <% elsif admin_signed_in? %>
-     <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link", data: { confirm: "ログアウトしますか？" } %>
-    <% else %>
-     <%= link_to "投稿一覧", reviews_path, class: "nav-link" %>
-     <%= link_to "会員登録", new_customer_registration_path, class: "nav-link" %>
-     <%= link_to "ログイン", new_customer_session_path, class: "nav-link" %>
-    <% end %>
+   <nav class="navbar navbar-expand-xl navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+     <ul class="navbar-nav ml-auto">
+      <% if customer_signed_in? %>
+       <li class="nav-item">
+        <%= link_to "投稿一覧", reviews_path, class: "nav-link btn btn-link" %>
+        </li>
+       <li class="nav-item">
+        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-link", data: { confirm: "ログアウトしますか？" } %>
+        </li>
+      <% elsif admin_signed_in? %>
+       <li class="nav-item">
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-link", data: { confirm: "ログアウトしますか？" } %>
+        </li>
+      <% else %>
+       <li class="nav-item">
+        <%= link_to "投稿一覧", reviews_path, class: "nav-link btn btn-link" %>
+        </li>
+       <li class="nav-item">
+        <%= link_to "会員登録", new_customer_registration_path, class: "nav-link btn btn-link" %>
+        </li>
+       <li class="nav-item">
+        <%= link_to "ログイン", new_customer_session_path, class: "nav-link btn btn-link" %>
+        </li>
+      <% end %>
+     </ul>
+    </div>
+   </nav>
+
 
     <div>
       <%= flash[:success] %>
