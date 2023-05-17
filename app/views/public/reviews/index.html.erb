@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-2">
+    <div class="col-md-3">
       <nav class="sidebar-sticky">
         <ul class="nav flex-column">
-          <h4>球場一覧</h4>
-          <% @ballparks.each do |ballpark| %>
-            <li class="nav-item">
+          <h4 class="mt-5">球場一覧</h4>
+           <% @ballparks.each do |ballpark| %>
+            <li class="nav-item mt-3">
               <%= ballpark.name %>
             </li>
           <% end %>
@@ -13,8 +13,8 @@
       </nav>
     </div>
 
-    <div class="col-md-10">
-      <h3>球場飯一覧</h3>
+    <div class="col-md-9">
+      <h3 class="mt-5">球場飯一覧</h3>
       <%= link_to "球場飯を投稿する", new_review_path, class: "btn btn-primary mb-3 mt-3" %>
       <div class="row">
         <% @reviews.each do |review| %>
