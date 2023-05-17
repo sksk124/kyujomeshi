@@ -1,24 +1,41 @@
-<h3>レビュー投稿</h3>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h3 class="text-center mt-5">球場飯情報投稿画面</h3>
 
-<%= form_with model: @review, url: reviews_path do |f| %>
+    <%= form_with model: @review, url: reviews_path do |f| %>
+      <div class="form-group">
+        <%= f.label "球場名" %>
+        <%= f.collection_select(:ballpark_id, Ballpark.all, :id, :name, {}, { class: "form-control" }) %>
+      </div>
 
-  <%= f.label :ballpark_id %>
-  <%= f.collection_select(:ballpark_id, Ballpark.all, :id, :name) %>
+      <div class="form-group">
+        <%= f.label "商品画像" %>
+        <%= f.file_field :image, accept: "image/*", class: "form-control-file" %>
+      </div>
 
-  <%= f.label :image %>
-  <%= f.file_field :image, accept: "image/*" %>
+      <div class="form-group">
+        <%= f.label "商品名" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+      <div class="form-group row">
+      <div class="col">
+        <%= f.label "価格" %>
+        <%= f.number_field :price, class: "form-control" %>
+       </div>
+      <div class="col">
+        <%= f.label "評価(1~5)"%>
+        <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]), {}, class: "form-control" %>
+       </div>
+      </div>
 
-  <%= f.label :price %>
-  <%= f.number_field :price %>
+      <div class="form-group">
+        <%= f.label "感想・レポート" %>
+        <%= f.text_area :thought, class: "form-control", rows: 5 %>
+       </div>
 
-  <%= f.label :rating %>
-  <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
 
-  <%= f.label :thought %>
-  <%= f.text_area :thought %>
-
-  <%= f.submit '投稿' %>
-<% end %>
+      <%= f.submit '投稿', class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
