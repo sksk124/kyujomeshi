@@ -1,19 +1,34 @@
-<h3>球場名一覧・新規登録</h3>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+<h3 class="my-4">球場名一覧・新規登録</h3>
 
- <%= form_with model: @ballpark, url: admin_ballparks_path do |f| %>
+<%= form_with model: @ballpark, url: admin_ballparks_path do |f| %>
   <div class="form-group">
-    <%= f.label :name %>
+    <%= f.label "新しい球場名", class: "font-weight-bold" %>
     <%= f.text_field :name, class: "form-control" %>
-   </div>
-   <%= f.submit '登録', class: "btn btn-primary" %>
-  <% end %>
+  </div>
+  <%= f.submit '球場を登録する', class: "btn btn-primary" %>
+<% end %>
 
-
- <% @ballparks.each do |ballpark| %>
-  <tr>
-    <td><%= ballpark.id %></td>
-    <td><%= ballpark.name %></td>
-    <td><%= link_to "編集", edit_admin_ballpark_path(ballpark) %></td>
-    <td><%= link_to "削除", admin_ballpark_path(ballpark), method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
-  </tr>
- <% end %>
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>球場名</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ballparks.each_with_index do |ballpark, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= ballpark.name %></td>
+        <td><%= link_to "編集", edit_admin_ballpark_path(ballpark) %></td>
+        <td><%= link_to "削除", admin_ballpark_path(ballpark), method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
