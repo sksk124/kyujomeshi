@@ -1,2 +1,45 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<div class="container">
+  <h3>会員詳細ページ</h3>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">姓</h5>
+      <p class="card-text"><%= @customer.last_name %></p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">名</h5>
+      <p class="card-text"><%= @customer.first_name %></p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">姓カナ</h5>
+      <p class="card-text"><%= @customer.last_name_kana %></p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">名カナ</h5>
+      <p class="card-text"><%= @customer.first_name_kana %></p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">ニックネーム</h5>
+      <p class="card-text"><%= @customer.nick_name %></p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Email</h5>
+      <p class="card-text"><%= @customer.email %></p>
+    </div>
+  </div>
+</div>
