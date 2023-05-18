@@ -50,6 +50,27 @@
       </form>
 
 
+     <!-- 絞り込みフォーム -->
+<form action="<%= reviews_path %>" method="get">
+  <select name="rating">
+    <option value="">評価を選択してください</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+
+  <select name="price">
+    <option value="">金額を選択してください</option>
+    <option value="1">~999</option>
+    <option value="2">1000~1999</option>
+    <option value="3">2000~2999</option>
+    <option value="4">3000~</option>
+  </select>
+
+  <input type="submit" value="絞り込み">
+     </form>
     </div>
    </nav>
 
