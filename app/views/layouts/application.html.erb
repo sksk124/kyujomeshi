@@ -43,6 +43,13 @@
         </li>
       <% end %>
      </ul>
+
+     <form class="form-inline" action="<%= reviews_path %>" method="get">
+       <input class="form-control mr-sm-2" type="search" name="search" placeholder="レビューを検索">
+       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+      </form>
+
+
     </div>
    </nav>
 
