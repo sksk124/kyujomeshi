@@ -1,4 +1,5 @@
 class Admin::ReviewsController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @reviews = Review.all
@@ -25,6 +26,12 @@ class Admin::ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:image, :name, :price, :rating, :thought, :customer_id, :ballpark_id)
+  end
+
+  def authenticate_admin!
+   unless admin_signed_in?
+    redirect_to top_path
+   end
   end
 
 end

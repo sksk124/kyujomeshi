@@ -8,7 +8,7 @@ class Public::CommentsController < ApplicationController
     else
       flash[:error] = "コメントの投稿に失敗しました"
     end
-    redirect_to review_path(@comment.review)
+    redirect_to review_path
   end
 
 

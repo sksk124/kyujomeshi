@@ -1,21 +1,22 @@
 class Public::ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :is_matching_login_customer, only: [:edit, :update, :destroy]
 
   def index
-  @reviews = Review.all
+   @reviews = Review.all
 
   # 名前による検索
-  if params[:search].present?
+   if params[:search].present?
     @reviews = @reviews.where("name LIKE ?", "%#{params[:search]}%")
-  end
+   end
 
   # 評価の絞り込み
-  if params[:rating].present?
+   if params[:rating].present?
     @reviews = @reviews.where(rating: params[:rating])
-  end
+   end
 
   # 金額の範囲での絞り込み
-  if params[:price].present?
+   if params[:price].present?
     case params[:price]
     when "1"
       @reviews = @reviews.where(price: 0..999)
@@ -26,23 +27,25 @@ class Public::ReviewsController < ApplicationController
     when "4"
       @reviews = @reviews.where("price >= ?", 3000)
     end
-  end
+   end
 
-  @ballparks = Ballpark.all
+   @ballparks = Ballpark.all
   end
 
 
   def show
-    @review = Review.find(params[:id])
     @ballparks = Ballpark.all
     @comments = @review.comments
   end
 
   def edit
-    @review = Review.find(params[:id])
+    unless current_customer == @review.customer
+     redirect_to review_path
+    end
   end
 
   def update
+
     if @review.update(review_params)
       redirect_to @review
     else
@@ -67,33 +70,8 @@ class Public::ReviewsController < ApplicationController
   end
 
   def destroy
-    review = Review.find(params[:id])
     review.destroy
     redirect_to reviews_path
-  end
-
-
-  def filter
-    @reviews = Review.all
-
-    # 評価の絞り込み
-    if params[:rating].present?
-      @reviews = @reviews.where(rating: params[:rating])
-    end
-
-    # 金額の範囲での絞り込み
-    if params[:price].present?
-      case params[:price]
-      when "1"
-        @reviews = @reviews.where(price: 0..999)
-      when "2"
-        @reviews = @reviews.where(price: 1000..1999)
-      when "3"
-        @reviews = @reviews.where(price: 2000..2999)
-      when "4"
-        @reviews = @reviews.where("price >= ?", 3000)
-      end
-    end
   end
 
 
@@ -107,6 +85,12 @@ class Public::ReviewsController < ApplicationController
 
   def set_review
     @review = Review.find(params[:id])
+  end
+
+  def is_matching_login_customer
+    unless current_customer == @review.customer
+     redirect_to review_path
+    end
   end
 
 end

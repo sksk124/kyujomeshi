@@ -26,8 +26,10 @@
             <p><strong>投稿日時:</strong> <%= @review.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
             <p><strong>価格:</strong> <%= @review.price %>円</p>
             <p><strong>評価:</strong> <%= star_rating(@review.rating) %></p>
-            <%= button_to "編集", edit_review_path, class: "btn btn-primary mt-3" %>
-            <%= button_to "削除", @review, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger mt-3" %>
+            <% if current_customer == @review.customer %>
+              <%= link_to "編集", edit_review_path(@review), class: "btn btn-primary mt-3" %>
+              <%= button_to "削除", @review, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger mt-3" %>
+             <% end %>
           </div>
         </div>
       </div>

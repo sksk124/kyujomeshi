@@ -21,10 +21,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   get '/about', to: 'public/homes#about', as: 'about'
 
 
- namespace :public do
-  get '/reviews/filter', to: 'reviews#filter', as: 'filter_reviews'
- end
-
 
   namespace :admin do
     resources :customers
