@@ -9,6 +9,7 @@ class Public::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @ballparks = Ballpark.all
+    @comments = @review.comments
   end
 
   def edit
