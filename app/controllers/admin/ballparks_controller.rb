@@ -1,4 +1,5 @@
 class Admin::BallparksController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
    @ballpark = Ballpark.new
@@ -41,6 +42,12 @@ class Admin::BallparksController < ApplicationController
 
   def ballpark_params
     params.require(:ballpark).permit(:name)
+  end
+
+  def authenticate_admin!
+    unless admin_signed_in?
+    redirect_to top_path
+    end
   end
 
 end
