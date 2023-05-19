@@ -19,6 +19,9 @@
         <%= link_to "投稿一覧", reviews_path, class: "nav-link btn btn-link" %>
         </li>
        <li class="nav-item">
+        <%= link_to "マイページ", customer_path(current_customer), class: "nav-link btn btn-link" %>
+        </li>
+       <li class="nav-item">
         <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-link", data: { confirm: "ログアウトしますか？" } %>
         </li>
       <% elsif admin_signed_in? %>
@@ -32,9 +35,6 @@
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-link", data: { confirm: "ログアウトしますか？" } %>
         </li>
       <% else %>
-       <li class="nav-item">
-        <%= link_to "投稿一覧", reviews_path, class: "nav-link btn btn-link" %>
-        </li>
        <li class="nav-item">
         <%= link_to "会員登録", new_customer_registration_path, class: "nav-link btn btn-link" %>
         </li>
