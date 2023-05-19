@@ -1,2 +1,39 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <nav class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <h4 class="mt-5">球場一覧</h4>
+           <% @ballparks.each do |ballpark| %>
+            <li class="nav-item mt-3">
+              <%= ballpark.name %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="col-md-9">
+      <h3 class="mt-5">球場飯一覧</h3>
+      <div class="row">
+        <% @reviews.each do |review| %>
+        <div class="col-md-3 mb-4">
+          <div style="border: 1px solid #ccc; padding: 10px; margin: 10px; width: 230px;">
+            <div class="text-center">
+            <% if review.image.attached? %>
+              <%= link_to(image_tag(review.image, size: "200x200"), review_path(review)) %>
+            <% else %>
+              <%= link_to(image_tag('no_image', size: "200x200"), review_path(review)) %>
+            <% end %>
+             </div>
+            <div style="margin-bottom: 10px;"><strong>球場名:</strong> <%= review.ballpark.name %></div>
+            <div style="margin-bottom: 10px;"><strong>商品名:</strong> <%= review.name %></div>
+            <div style="margin-bottom: 10px;"><strong>価格:</strong> <%= number_with_delimiter(review.price) %>円</div>
+            <div style="margin-bottom: 10px;"><strong>評価:</strong> <%= star_rating(review.rating) %></div>
+          </div>
+         </div>
+        <% end %>
+      </div>
+     </div>
+    </div>
+  </div>
