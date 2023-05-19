@@ -29,6 +29,15 @@ class Public::ReviewsController < ApplicationController
     end
    end
 
+   # 球場で絞り込み
+  if params[:ballpark_id].present?
+    @reviews = Review.where(ballpark_id: params[:ballpark_id])
+  else
+    @reviews = Review.all
+  end
+
+
+
    @ballparks = Ballpark.all
   end
 

@@ -6,7 +6,7 @@
           <h4 class="mt-5">球場一覧</h4>
            <% @ballparks.each do |ballpark| %>
             <li class="nav-item mt-3">
-              <%= ballpark.name %>
+              <%= link_to ballpark.name, reviews_path(ballpark_id: ballpark.id) %>
             </li>
           <% end %>
         </ul>
