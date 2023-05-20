@@ -11,68 +11,95 @@
   </head>
 
   <body>
-   <nav class="navbar navbar-expand-xl navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarNav">
-     <ul class="navbar-nav ml-auto">
-      <% if customer_signed_in? %>
-       <li class="nav-item">
-        <%= link_to "投稿一覧", reviews_path, class: "nav-link btn btn-link" %>
-        </li>
-       <li class="nav-item">
-        <%= link_to "マイページ", customer_path(current_customer), class: "nav-link btn btn-link" %>
-        </li>
-       <li class="nav-item">
-        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-link", data: { confirm: "ログアウトしますか？" } %>
-        </li>
-      <% elsif admin_signed_in? %>
-       <li class="nav-item">
-        <%= link_to "投稿一覧", admin_reviews_path, class: "nav-link btn btn-link" %>
-        </li>
-       <li class="nav-item">
-        <%= link_to "球場画面", admin_ballparks_path, class: "nav-link btn btn-link" %>
-        </li>
-       <li class="nav-item">
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-link", data: { confirm: "ログアウトしますか？" } %>
-        </li>
-      <% else %>
-       <li class="nav-item">
-        <%= link_to "会員登録", new_customer_registration_path, class: "nav-link btn btn-link" %>
-        </li>
-       <li class="nav-item">
-        <%= link_to "ログイン", new_customer_session_path, class: "nav-link btn btn-link" %>
-        </li>
-      <% end %>
-     </ul>
+ <nav class="navbar navbar-expand-xl navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto mr-0">
+      <li class="nav-item">
+       <div class="row justify-content-end">
+        <div class="col-auto">
+         <ul class="navbar-nav">
+          <% if customer_signed_in? %>
+           <li class="nav-item">
+            <%= link_to "球場飯を投稿する", new_review_path, class: "btn btn-success" %>
+           </li>
+           <li class="nav-item">
+            <%= link_to "投稿一覧", reviews_path, class: "nav-link btn btn-link" %>
+           </li>
+           <li class="nav-item">
+            <%= link_to "マイページ", customer_path(current_customer), class: "nav-link btn btn-link" %>
+           </li>
+           <li class="nav-item">
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-link", data: { confirm: "ログアウトしますか？" } %>
+           </li>
+          <% elsif admin_signed_in? %>
+           <li class="nav-item">
+            <%= link_to "投稿一覧", admin_reviews_path, class: "nav-link btn btn-link" %>
+           </li>
+           <li class="nav-item">
+            <%= link_to "球場画面", admin_ballparks_path, class: "nav-link btn btn-link" %>
+           </li>
+           <li class="nav-item">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-link", data: { confirm: "ログアウトしますか？" } %>
+           </li>
+          <% else %>
+           <li class="nav-item">
+            <%= link_to "会員登録", new_customer_registration_path, class: "nav-link btn btn-link" %>
+           </li>
+           <li class="nav-item">
+            <%= link_to "ログイン", new_customer_session_path, class: "nav-link btn btn-link" %>
+           </li>
+          <% end %>
+         </ul>
+        </div>
+        </div>
 
-     <form class="form-inline" action="<%= reviews_path %>" method="get">
-       <input class="form-control mr-sm-2" type="search" name="search" placeholder="レビューを検索">
-       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
-      </form>
+        <div class="row justify-content-end">
+          <div class="col-auto">
+            <form class="mt-3">
+              <div class="form-row">
+                <div class="col-auto">
+                  <div class="form-group">
+                    <select name="rating" class="form-control mb-2">
+                      <option value="">評価を選択</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="form-group">
+                    <select name="price" class="form-control mb-2">
+                      <option value="">金額を選択</option>
+                      <option value="1">~999</option>
+                      <option value="2">1000~1999</option>
+                      <option value="3">2000~2999</option>
+                      <option value="4">3000~</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="form-group">
+                    <input class="form-control" type="search" name="search" placeholder="レビューを検索">
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-outline-success" type="submit">検索</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 
-     <!-- 絞り込みフォーム -->
-<form action="<%= reviews_path %>" method="get">
-  <select name="rating">
-    <option value="">評価を選択してください</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </select>
 
-  <select name="price">
-    <option value="">金額を選択してください</option>
-    <option value="1">~999</option>
-    <option value="2">1000~1999</option>
-    <option value="3">2000~2999</option>
-    <option value="4">3000~</option>
-  </select>
 
-  <input type="submit" value="絞り込み">
-     </form>
-    </div>
-   </nav>
 
 
     <div>
