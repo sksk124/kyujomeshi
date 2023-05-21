@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-2">
+    <div class="col-md-3">
       <nav class="sidebar-sticky">
         <ul class="nav flex-column">
           <h4 class="mt-5">球場一覧</h4>
@@ -13,28 +13,52 @@
       </nav>
     </div>
 
-    <div class="col-md-10">
+<style>
+  .review-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  .review-item:last-child {
+    border-bottom: none;
+  }
+</style>
+
+<div class="col-md-9">
   <h3 class="mt-5">球場飯一覧</h3>
   <%= link_to "球場飯を投稿する", new_review_path, class: "btn btn-primary mb-3 mt-3" %>
   <div class="row">
     <% @reviews.each do |review| %>
-    <div class="col-md-4 mb-4">
-      <div class="card" style="width: 100%;">
-        <div class="card-body">
-          <div class="text-center">
+      <div class="col-md-12 mb-5 review-item">
+        <div class="row">
+          <div class="col-md-5">
             <% if review.image.attached? %>
-              <%= link_to(image_tag(review.image, size: "200x200"), review_path(review)) %>
+              <%= link_to(image_tag(review.image, size: "250x250"), review_path(review), class: "d-block") %>
             <% else %>
-              <%= link_to(image_tag('no_image', size: "200x200"), review_path(review)) %>
+              <%= link_to(image_tag('no_image', size: "200x200"), review_path(review), class: "d-block") %>
             <% end %>
           </div>
-          <div style="margin-bottom: 10px;"><strong>球場名:</strong> <%= review.ballpark.name %></div>
-          <div style="margin-bottom: 10px;"><strong>商品名:</strong> <%= review.name %></div>
-          <div style="margin-bottom: 10px;"><strong>価格:</strong> <%= number_with_delimiter(review.price) %>円</div>
-          <div style="margin-bottom: 10px;"><strong>評価:</strong> <%= star_rating(review.rating) %></div>
+  <div class="col-md-7">
+  <div>
+    <strong class="mr-2 text-left">商品名:</strong>
+    <span class="font-weight-bold" style="font-size: 1.2rem;"><%= review.name %></span>
+  </div>
+  <div>
+    <strong class="mr-2 text-left">球場名:</strong>
+    <span class="font-weight-bold" style="font-size: 1.2rem;"><%= review.ballpark.name %></span>
+  </div>
+  <div class="text-left">
+    <strong class="mr-2">価格:</strong>
+    <span class="font-weight-bold" style="font-size: 1.2rem;"><%= number_with_delimiter(review.price) %>円</span>
+  </div>
+  <div class="text-left">
+    <strong class="mr-2">評価:</strong>
+    <span class="font-weight-bold" style="font-size: 1.2rem;"><%= star_rating(review.rating) %></span>
+  </div>
+</div>
+
         </div>
       </div>
-    </div>
     <% end %>
   </div>
 </div>
