@@ -30,12 +30,15 @@ class Public::ReviewsController < ApplicationController
    end
 
    # 球場で絞り込み
-  if params[:ballpark_id].present?
-    @reviews = Review.where(ballpark_id: params[:ballpark_id])
-  else
-    @reviews = Review.all
-  end
+   if params[:ballpark_id].present?
+     @reviews = @reviews.where(ballpark_id: params[:ballpark_id])
+   end
 
+
+   # 投稿者での絞り込み
+   if params[:customer_id].present?
+     @reviews = @reviews.where(customer_id: params[:customer_id])
+   end
 
 
    @ballparks = Ballpark.all
@@ -45,6 +48,12 @@ class Public::ReviewsController < ApplicationController
   def show
     @ballparks = Ballpark.all
     @comments = @review.comments
+
+    # 投稿者での絞り込み
+   if params[:customer_id].present?
+     @reviews = @reviews.where(customer_id: params[:customer_id])
+   end
+
   end
 
   def edit
