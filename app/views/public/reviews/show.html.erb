@@ -1,75 +1,101 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-2">
-      <nav class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <h4 class="mt-5">球場一覧</h4>
-          <% @ballparks.each do |ballpark| %>
-            <li class="nav-item mt-3">
-              <%= ballpark.name %>
-            </li>
-          <% end %>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="col-md-10">
-      <div class="row justify-content-center">
-        <div class="col-md-5 mt-5">
-          <%= image_tag @review.image, size: "400x400", class: "img-fluid" if @review.image.attached? %>
+    <div class="row justify-content-center">
+        <div class="col-md-2">
+            <nav class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <h4 class="mt-5"><strong>球場一覧</strong></h4>
+                    <% @ballparks.each do |ballpark| %>
+                    <li class="nav-item mt-3">
+                        <%= link_to ballpark.name, reviews_path(ballpark_id: ballpark.id) %>
+                    </li>
+                    <% end %>
+                </ul>
+            </nav>
         </div>
 
+        <div class="col-md-10">
+            <div class="row justify-content-center">
+                <div class="col-md-5 mt-5">
+                    <%= image_tag @review.image, size: "300x300", class: "img-fluid" if @review.image.attached? %>
+                </div>
 
-        <div class="col-md-5 mt-5">
-          <div>
-            <p><strong>投稿者:</strong> <%= @review.customer.nick_name %></p>
-            <p><strong>投稿日時:</strong> <%= @review.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
-            <p><strong>価格:</strong> <%= @review.price %>円</p>
-            <p><strong>評価:</strong> <%= star_rating(@review.rating) %></p>
-            <% if current_customer == @review.customer %>
-              <%= link_to "編集", edit_review_path(@review), class: "btn btn-primary mt-3" %>
-              <%= button_to "削除", @review, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger mt-3" %>
-             <% end %>
-          </div>
-        </div>
-      </div>
+                <div class="col-md-5 mt-5">
+                    <div>
+                        <h4 class="mb-4"><strong><%= @review.name %></strong></h4>
+                        <p><strong>投稿者:</strong>  <%= link_to "#{@review.customer.nick_name}さん", reviews_path(customer_id: @review.customer.id) %></p>
+                        <p><strong>投稿日時:</strong> <%= @review.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
+                        <p><strong>価格:</strong> <%= @review.price %>円</p>
+                        <p><strong>評価:</strong> <%= star_rating(@review.rating) %></p>
+                        <% if current_customer == @review.customer %>
+                        <div class="mt-3">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="reviewActionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    編集
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="reviewActionsDropdown">
+                                    <%= link_to "編集", edit_review_path(@review), class: "dropdown-item" %>
+                                    <%= button_to "削除", @review, method: :delete, data: {confirm: "本当に削除しますか？" }, class: "dropdown-item", form: {class: "d-inline" } %>
+                                </div>
+                            </div>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
 
-      <div class="row justify-content-center">
-        <div class="col-md-10 mt-3">
-          <h5>レビュー内容</h5>
-          <p><%= @review.thought %></p>
-        </div>
-      </div>
-
-      <div class="row justify-content-center">
-        <div class="col-md-10 mt-3">
-          <h5>コメント一覧</h5>
-          <% @comments.each do |comment| %>
-            <div>
-              <p><strong>コメント投稿者:</strong> <%= comment.customer.nick_name %></p>
-              <p><strong>コメント日時:</strong> <%= comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
-              <p><strong>コメント内容:</strong> <%= comment.comment %></p>
-              <%= button_to "削除", comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger mt-3" %>
             </div>
-          <% end %>
-        </div>
-      </div>
 
-      <div class="row justify-content-center">
-        <div class="col-md-10 mt-3">
-          <h5>コメント投稿フォーム</h5>
-          <%= form_with(model: Comment.new, url: comments_path, local: true) do |form| %>
-            <div class="form-group">
-              <%= form.text_area :comment, class: "form-control", rows: 3 %>
+            <div class="row justify-content-center">
+                <div class="col-md-10 mt-3">
+                    <h5 class="mb-3"><strong>球場飯レビュー</strong></h5>
+                    <div class="p-4 bg-light border rounded">
+                        <p><%= @review.thought %></p>
+                    </div>
+                </div>
             </div>
-            <%= form.hidden_field :customer_id, value: current_customer.id %>
-            <%= form.hidden_field :review_id, value: @review.id %>
-            <%= form.submit "コメント投稿", class: "btn btn-primary" %>
-          <% end %>
+
+            <style>
+                .review-item {
+                    margin - bottom: 20px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #ccc;
+  }
+            </style>
+
+            <div class="row justify-content-center">
+                <div class="col-md-10 mt-5">
+                    <h5 class="mb-3"><strong><%= "#{@comments.count}件のコメント" %></strong></h5>
+                    <% @comments.each do |comment| %>
+                    <div class="review-item mb-4">
+                        <p><%= link_to "#{comment.customer.nick_name}さん", reviews_path(customer_id: @review.customer.id) %> <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+                        <p><%= comment.comment %></p>
+                        <% if current_customer == comment.customer %>
+                        <div class="text-right">
+                            <%= button_to "削除", comment_path(comment), method: :delete, data: {confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
+                        </div>
+                        <% end %>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+
+
+
+
+            <div class="row justify-content-center">
+                <div class="col-md-10 mt-5">
+                    <h5 class="mb-3"><strong>コメント投稿フォーム</strong></h5>
+                    <%= form_with(model: Comment.new, url: comments_path, local: true) do |form| %>
+                    <div class="form-group">
+                        <%= form.text_area :comment, class: "form-control", rows: 3 %>
+                    </div>
+                    <%= form.hidden_field :customer_id, value: current_customer.id %>
+                    <%= form.hidden_field :review_id, value: @review.id %>
+                    <%= form.submit "コメントを投稿する", class: "btn btn-primary" %>
+                    <% end %>
+                </div>
+            </div>
+
+
         </div>
-      </div>
-
-
     </div>
-  </div>
 </div>

@@ -1,45 +1,76 @@
 <div class="container">
-  <h3>会員詳細ページ</h3>
+  <h3 class="my-4 font-weight-bold text-center">会員情報</h3>
 
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">姓</h5>
-      <p class="card-text"><%= @customer.last_name %></p>
-    </div>
-  </div>
+  <table class="table table-bordered table-height mb-5">
+    <tbody>
+      <tr>
+        <th class="bg-light" scope="row">姓</th>
+        <td><%= @customer.last_name %></td>
+      </tr>
+      <tr>
+        <th class="bg-light" scope="row">名</th>
+        <td><%= @customer.first_name %></td>
+      </tr>
+      <tr>
+        <th class="bg-light" scope="row">姓カナ</th>
+        <td><%= @customer.last_name_kana %></td>
+      </tr>
+      <tr>
+        <th class="bg-light" scope="row">名カナ</th>
+        <td><%= @customer.first_name_kana %></td>
+      </tr>
+      <tr>
+        <th class="bg-light" scope="row">ニックネーム</th>
+        <td><%= @customer.nick_name %></td>
+      </tr>
+      <tr>
+        <th class="bg-light" scope="row">Email</th>
+        <td><%= @customer.email %></td>
+      </tr>
+    </tbody>
+  </table>
 
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">名</h5>
-      <p class="card-text"><%= @customer.first_name %></p>
-    </div>
-  </div>
+  <h3 class="my-4 font-weight-bold text-center">投稿した球場飯</h3>
 
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">姓カナ</h5>
-      <p class="card-text"><%= @customer.last_name_kana %></p>
+  <% @customer.reviews.each do |review| %>
+    <div class="col-md-12 mb-5 review-item">
+      <div class="row">
+        <div class="col-md-4">
+          <% if review.image.attached? %>
+            <%= link_to(image_tag(review.image, size: "200x200"), review_path(review), class: "d-block") %>
+          <% else %>
+            <%= link_to(image_tag('no_image', size: "200x200"), review_path(review), class: "d-block") %>
+          <% end %>
+        </div>
+        <div class="col-md-8">
+          <div>
+            <%= link_to review_path(review) do %>
+              <span class="font-weight-bold" style="font-size: 1.5rem;"><%= review.name %></span>
+            <% end %>
+          </div>
+          <div class="mt-4">
+            <strong>球場名:</strong> <span class="font-weight-bold"><%= review.ballpark.name %></span>
+          </div>
+          <div class="mt-3">
+            <strong>価格:</strong> <span class="font-weight-bold"><%= number_with_delimiter(review.price) %>円</span>
+          </div>
+          <div class="mt-3">
+            <strong>評価:</strong> <span class="font-weight-bold mb"><%= star_rating(review.rating) %></span>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">名カナ</h5>
-      <p class="card-text"><%= @customer.first_name_kana %></p>
-    </div>
-  </div>
-
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">ニックネーム</h5>
-      <p class="card-text"><%= @customer.nick_name %></p>
-    </div>
-  </div>
-
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Email</h5>
-      <p class="card-text"><%= @customer.email %></p>
-    </div>
-  </div>
+  <% end %>
 </div>
+
+<style>
+  .table-height td {
+    padding: 20px; /* 適宜調整してください */
+  }
+
+  .review-item {
+    border: 1px solid #dee2e6;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+</style>
