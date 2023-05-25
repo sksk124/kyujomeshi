@@ -11,14 +11,27 @@
         </head>
 
         <body>
+            <header>
             <nav class="navbar navbar-expand-xl navbar-light bg-light">
-                <div class="collapse navbar-collapse" id="navbarNav">
+    <a class="navbar-brand p-4 text-right ml-5" href="/">
+        <%= image_tag('IMG_7256.PNG', size: "100x50") %>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto mr-0">
                         <li class="nav-item">
                             <div class="row justify-content-end">
                                 <div class="col-auto">
                                     <ul class="navbar-nav">
                                         <% if customer_signed_in? %>
+                                        <li class="nav-item">
+  <%= link_to "球場飯を投稿する", new_review_path, class: "nav-link btn btn-link font-weight-bold text-primary" %>
+</li>
+
                                         <li class="nav-item">
                                             <%= link_to "球場飯一覧", reviews_path, class: "nav-link btn btn-link" %>
                                         </li>
@@ -30,7 +43,7 @@
                                         </li>
                                         <% elsif admin_signed_in? %>
                                         <li class="nav-item">
-                                            <%= link_to "投稿一覧", admin_reviews_path, class: "nav-link btn btn-link" %>
+                                            <%= link_to "球場飯一覧", admin_reviews_path, class: "nav-link btn btn-link" %>
                                         </li>
                                         <li class="nav-item">
                                             <%= link_to "球場画面", admin_ballparks_path, class: "nav-link btn btn-link" %>
@@ -39,6 +52,7 @@
                                             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-link", data: {confirm: "ログアウトしますか？" } %>
                                         </li>
                                         <% else %>
+                                        <%= link_to "ゲストログイン(お試し)", homes_guest_sign_in_path, data: { turbo_method: :post } %>
                                         <li class="nav-item">
                                             <%= link_to "会員登録", new_customer_registration_path, class: "nav-link btn btn-link" %>
                                         </li>
@@ -95,11 +109,13 @@
                     </ul>
                 </div>
             </nav>
+            </header>
 
-
+            <main>
             <div class="text-center mt-3 mb-3">
                 <%= flash[:success] %>
             </div>
+            </main>
 
             <%= yield %>
 
