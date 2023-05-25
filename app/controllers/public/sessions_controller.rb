@@ -3,13 +3,6 @@
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
-  #ゲストログイン機能
-  def new_guest
-    customer = Customer.guest
-    sign_in customer   # ユーザーをログインさせる
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
-  end
-
   # GET /resource/sign_in
   # def new
   #   super

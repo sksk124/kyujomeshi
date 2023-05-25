@@ -5,6 +5,18 @@ class Admin::ReviewsController < ApplicationController
     @reviews = Review.all
   end
 
+  def show
+    @ballparks = Ballpark.all
+    @review = Review.find(params[:id])
+    @comments = @review.comments
+
+    # 投稿者での絞り込み
+   if params[:customer_id].present?
+     @reviews = @reviews.where(customer_id: params[:customer_id])
+   end
+
+  end
+
   def new
     @review = Review.new
   end
