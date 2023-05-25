@@ -1,28 +1,33 @@
-<h3>レビュー一覧</h3>
+<div class="container">
+  <h3 class="text-center">球場飯一覧</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>画像</th>
-      <th>商品名</th>
-      <th>価格</th>
-      <th>評価</th>
-      <th>感想</th>
-      <th>投稿日時</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @reviews.each do |review| %>
+  <table class="table">
+    <!-- テーブルのヘッダー部分 -->
+    <thead class="thead-light">
       <tr>
-        <td><%= review.id %></td>
-        <td><%= image_tag review.image, size: "200x200" if review.image.attached? %></td>
-        <td><%= review.name %></td>
-        <td><%= review.price %></td>
-        <td><%= star_rating(review.rating) %></td>
-        <td><%= review.thought %></td>
-        <td><%= review.created_at %></td>
+        <th>ID</th>
+        <th>画像</th>
+        <th>商品名</th>
+        <th>価格</th>
+        <th>評価</th>
+        <th>感想</th>
+        <th>投稿日時</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <!-- テーブルのデータ部分 -->
+    <tbody>
+      <% @reviews.each do |review| %>
+        <tr>
+          <td class="text-center"><%= review.id %></td>
+          <td class="text-center"><%= image_tag review.image, size: "100x100" if review.image.attached? %></td>
+          <td class="text-center"><%= review.name %></td>
+          <td class="text-center"><%= review.price %></td>
+          <td class="text-center"><%= star_rating(review.rating) %></td>
+          <td class="text-center"><%= review.thought %></td>
+          <td class="text-center"><%= review.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
