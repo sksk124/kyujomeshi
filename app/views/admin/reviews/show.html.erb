@@ -51,11 +51,14 @@
       <% @comments.each do |comment| %>
         <div class="review-item mb-4">
           <p>
-            <% if current_admin && comment.customer_id.nil? %>
-              管理者 <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
-            <% else %>
-              <%= link_to "#{comment.customer.nick_name}さん", reviews_path(customer_id: comment.customer.id) %> <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
-            <% end %>
+            <% if current_admin && comment.customer_id == 0 %>
+  管理者 <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+<% elsif comment.customer_id.present? %>
+  <%= link_to "#{comment.customer.nick_name}さん", reviews_path(customer_id: comment.customer.id) %> <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+<% else %>
+  Unknown User <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+<% end %>
+
           </p>
           <p><%= comment.comment %></p>
           <% if current_customer && current_customer.id == comment.customer_id || current_admin %>

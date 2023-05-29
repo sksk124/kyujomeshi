@@ -26,11 +26,11 @@
       </td>
       <td class="text-center">
         <% if review.image.attached? %>
-          <%= link_to(image_tag(review.image, size: "100x100"), review_path(review)) %>
+          <%= link_to(image_tag(review.image, size: "100x100"), admin_review_path(review)) %>
         <% end %>
       </td>
       <td class="text-center">
-        <%= link_to(review.name, review_path(review)) %>
+        <%= link_to(review.name, admin_review_path(review)) %>
       </td>
       <td class="text-center"><%= number_with_delimiter(review.price) %>円</td>
       <td class="text-center"><%= star_rating(review.rating) %></td>
