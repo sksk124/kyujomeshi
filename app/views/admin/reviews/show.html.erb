@@ -18,7 +18,7 @@
                 編集
               </button>
               <div class="dropdown-menu" aria-labelledby="reviewActionsDropdown">
-                <%= link_to "編集", edit_review_path(@review), class: "dropdown-item" %>
+                <%= link_to "編集", edit_admin_review_path(@review), class: "dropdown-item" %>
                 <%= button_to "削除", @review, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item", form: { class: "d-inline" } %>
               </div>
             </div>
