@@ -20,5 +20,7 @@
   <%= f.label :thought %>
   <%= f.text_area :thought %>
 
+  <%= f.hidden_field :customer_id, value: 0 %>
+
   <%= f.submit '投稿' %>
 <% end %>
