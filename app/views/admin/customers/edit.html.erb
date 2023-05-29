@@ -1,21 +1,47 @@
-<h3>会員情報編集</h3>
-
-<%= form_with model: @customer do |f| %>
-
-<%= f.text_field :last_name %>
-
-<%= f.text_field :first_name %>
-
-<%= f.text_field :last_name_kana %>
-
-<%= f.text_field :first_name_kana %>
-
-<%= f.text_field :nick_name %>
-
-<%= f.text_area :email %>
-
-<%= f.select :is_deleted, [['有効', false], ['退会済み', true]] %>
-
-<%= f.submit '保存' %>
-
-<% end %>
+<div class="container">
+  <h3>会員情報編集</h3>
+  <%= form_with model: @customer, url: admin_customer_path(@customer), class: "form" do |f| %>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= f.label :last_name, "姓", class: "font-weight-bold" %>
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= f.label :first_name, "名", class: "font-weight-bold" %>
+        <%= f.text_field :first_name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= f.label :last_name_kana, "姓カナ", class: "font-weight-bold" %>
+        <%= f.text_field :last_name_kana, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= f.label :first_name_kana, "名カナ", class: "font-weight-bold" %>
+        <%= f.text_field :first_name_kana, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= f.label :nick_name, "ニックネーム", class: "font-weight-bold" %>
+        <%= f.text_field :nick_name, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= f.label :email, "メールアドレス", class: "font-weight-bold" %>
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :is_deleted, "退会ステータス", class: "font-weight-bold" %><br>
+      <div class="form-check form-check-inline">
+        <%= f.radio_button :is_deleted, false, checked: !@customer.is_deleted, class: "form-check-input" %>
+        <%= f.label :is_deleted, "有効", class: "form-check-label" %>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= f.radio_button :is_deleted, true, checked: @customer.is_deleted, class: "form-check-input" %>
+        <%= f.label :is_deleted, "退会済み", class: "form-check-label" %>
+      </div>
+    </div>
+    <%= f.submit '保存', class: "btn btn-primary" %>
+  <% end %>
+</div>

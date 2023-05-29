@@ -1,32 +1,35 @@
-<h3>会員一覧</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>姓</th>
-      <th>名</th>
-      <th>姓カナ</th>
-      <th>名カナ</th>
-      <th>ニックネーム</th>
-      <th>メールアドレス</th>
-      <th>退会ステータス</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @customers.each do |customer| %>
-      <tr>
-        <td><%= customer.id %></td>
-        <td><%= customer.last_name %></td>
-        <td><%= customer.first_name %></td>
-        <td><%= customer.last_name_kana %></td>
-        <td><%= customer.first_name_kana %></td>
-        <td><%= customer.nick_name %></td>
-        <td><%= customer.email %></td>
-        <td><%= customer.is_deleted ? '退会済み' : '有効' %></td>
-        <td><%= link_to '詳細', admin_customer_path(customer) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <h3 class="text-center font-weight-bold mt-4 mb-4">会員一覧</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>姓</th>
+          <th>名</th>
+          <th>姓カナ</th>
+          <th>名カナ</th>
+          <th>ニックネーム</th>
+          <th>メールアドレス</th>
+          <th>退会ステータス</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.id %></td>
+            <td><%= customer.last_name %></td>
+            <td><%= customer.first_name %></td>
+            <td><%= customer.last_name_kana %></td>
+            <td><%= customer.first_name_kana %></td>
+            <td><%= customer.nick_name %></td>
+            <td><%= customer.email %></td>
+            <td><%= customer.is_deleted ? '退会済み' : '有効' %></td>
+            <td><%= link_to '詳細', admin_customer_path(customer), class: "btn btn-primary btn-sm" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
