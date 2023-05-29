@@ -21,7 +21,9 @@
   <% @reviews.each do |review| %>
     <tr>
       <td class="text-center"><%= review.id %></td>
-      <td class="text-center"><%= review.customer.nick_name %></td>
+      <td class="text-center">
+        <%= link_to review.customer.nick_name, admin_customer_path(review.customer) %>
+      </td>
       <td class="text-center">
         <% if review.image.attached? %>
           <%= link_to(image_tag(review.image, size: "100x100"), review_path(review)) %>
@@ -36,6 +38,7 @@
     </tr>
   <% end %>
 </tbody>
+
 
     </table>
   </div>
