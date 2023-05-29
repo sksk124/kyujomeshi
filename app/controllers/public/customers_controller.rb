@@ -5,7 +5,7 @@ class Public::CustomersController < ApplicationController
   def show
    @customer = Customer.find(params[:id])
    @reviews = @customer.reviews
-
+   
    # アクセス制御のコードを追加
     unless current_customer == @customer
       redirect_to reviews_path
