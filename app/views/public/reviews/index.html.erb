@@ -24,10 +24,10 @@
 
         <div class="col-md-9">
             <h3 class="mt-5">
-                <strong><%= link_to "球場飯一覧", reviews_path, style: "color: black;" %></strong>
+                <strong><%= link_to "球場飯一覧", reviews_path, style: "color: black;", data: { nickname: nil } %></strong>
             </h3>
 
-            
+
             <div class="row">
                 <% @reviews.each do |review| %>
                 <div class="col-md-12 mb-5 review-item">
