@@ -15,7 +15,11 @@
         </div>
 
 
+
    <div class="col-md-9">
+      <div class="text-center mt-5">
+    <%= image_tag('トップ.jpeg', size: "700x450") %>
+  </div>
   <h3 class="mt-5"><strong>球場飯一覧</strong></h3>
   <div class="row">
     <% @reviews.order(created_at: :desc).limit(6).each do |review| %>
