@@ -16,8 +16,14 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   get '/', to: 'public/homes#top', as: 'top'
   get '/about', to: 'public/homes#about', as: 'about'
-  post '/homes/guest_sign_in', to: 'public/homes#guest_sign_in'
 
+  namespace :public do
+    resources :homes, only: [] do
+      collection do
+        post :guest_sign_in
+      end
+    end
+  end
 
 
   namespace :admin do
