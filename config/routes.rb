@@ -16,6 +16,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   get '/', to: 'public/homes#top', as: 'top'
   get '/about', to: 'public/homes#about', as: 'about'
+  get '/customers/unsubscribe', to: 'public/customers#unsubscribe'
+  patch 'customers/unsubscribe' => 'public/customers#withdraw', as: :customers_withdraw
 
   namespace :public do
     resources :homes, only: [] do
