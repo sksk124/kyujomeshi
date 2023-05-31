@@ -28,15 +28,18 @@
                                 <div class="col-auto">
                                     <ul class="navbar-nav">
                                         <% if customer_signed_in? %>
+                                        <% unless current_customer.id == 9999 %>
                                         <li class="nav-item">
   <%= link_to "球場飯を投稿する", new_review_path, class: "nav-link btn btn-link font-weight-bold text-primary" %>
 </li>
 
-                                        <li class="nav-item">
-                                            <%= link_to "球場飯一覧", reviews_path, class: "nav-link btn btn-link" %>
-                                        </li>
+
                                         <li class="nav-item">
                                             <%= link_to "マイページ", customer_path(current_customer), class: "nav-link btn btn-link" %>
+                                        </li>
+                                        <% end %>
+                                        <li class="nav-item">
+                                            <%= link_to "球場飯一覧", reviews_path, class: "nav-link btn btn-link" %>
                                         </li>
                                         <li class="nav-item">
                                             <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-link", data: {confirm: "ログアウトしますか？" } %>
@@ -133,7 +136,7 @@
   <div class="container-fluid">
     <p class="text-center">&copy; 2023 球場飯. All rights reserved.</p>
     <p class="text-center">
-      <a href="<%= top_path %>" class="text-muted">トップページ</a> |
+      <a href="/" class="text-muted">トップページ</a> |
       <a href="<%= about_path %>" class="text-muted">アバウトページ</a>
     </p>
   </div>
