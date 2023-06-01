@@ -8,11 +8,23 @@
 
                 <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
                 <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+                <style>
+    .footer-divider {
+      border-top: 1px solid #ccc;
+    }
+    .header-divider {
+      border-bottom: 1px solid #ccc;
+    }
+  </style>
+
+
+
         </head>
 
         <body>
-            <header>
-            <nav class="navbar navbar-expand-xl navbar-light bg-light">
+            <header class="header-divider">
+            <nav class="navbar navbar-expand-xl navbar-light">
     <a class="navbar-brand p-4 text-right ml-5" href="/">
         <%= image_tag('IMG_7256.PNG', size: "100x50") %>
     </a>
@@ -45,6 +57,9 @@
                                             <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-link", data: {confirm: "ログアウトしますか？" } %>
                                         </li>
                                         <% elsif admin_signed_in? %>
+                                        <li class="nav-item">
+  <%= link_to "球場飯を投稿する", new_review_path, class: "nav-link btn btn-link font-weight-bold text-primary" %>
+</li>
                                         <li class="nav-item">
                                             <%= link_to "球場飯一覧", admin_reviews_path, class: "nav-link btn btn-link" %>
                                         </li>
@@ -117,6 +132,9 @@
                         </li>
                     </ul>
                 </div>
+
+
+
             </nav>
             </header>
 
@@ -132,7 +150,7 @@
             <%= yield %>
 
 
-<footer class="footer bg-light" style="padding: 20px 0;">
+<footer class="footer-divider" style="padding: 20px 0;">
   <div class="container-fluid">
     <p class="text-center">&copy; 2023 球場飯. All rights reserved.</p>
     <p class="text-center">

@@ -1,23 +1,22 @@
 <style>
-  .table td,
-  .table th {
-    padding-top: 30px;
-    padding-bottom: 30px;
+  .table-height td {
+    padding: 20px; /* 適宜調整してください */
+  }
+
+  .review-item {
+    border: 1px solid #dee2e6;
+    padding: 20px;
+    margin-bottom: 20px;
   }
 </style>
 
-
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-9">
-      <h3 class="font-weight-bold mt-4 mb-4">会員情報</h3>
+    <div class="col-md-5">
+      <h4 class="font-weight-bold mt-4 mb-4">会員情報</h4>
       <div class="table-responsive">
-        <table class="table">
+        <table class="table table-height">
           <tbody>
-            <tr>
-              <th scope="row">会員ID</th>
-              <td><%= @customer.id %></td>
-            </tr>
             <tr>
               <th scope="row">氏名</th>
               <td><%= @customer.last_name %> <%= @customer.first_name %></td>
@@ -45,49 +44,38 @@
         <%= link_to "会員情報編集", edit_customer_path, class: "btn btn-primary" %>
       </div>
     </div>
-  </div>
+    <div class="col-md-7">
+      <h4 class="my-4 font-weight-bold">投稿した球場飯</h4>
 
-  <h3 class="my-4 font-weight-bold text-center">投稿した球場飯</h3>
-
-  <% @customer.reviews.each do |review| %>
-    <div class="col-md-12 mb-5 review-item">
-      <div class="row">
-        <div class="col-md-4">
-          <% if review.image.attached? %>
-            <%= link_to(image_tag(review.image, size: "200x200"), review_path(review), class: "d-block") %>
-          <% else %>
-            <%= link_to(image_tag('no_image', size: "200x200"), review_path(review), class: "d-block") %>
-          <% end %>
+      <% @customer.reviews.each do |review| %>
+        <div class="col-md-12 mb-5 review-item">
+          <div class="row">
+            <div class="col-md-4">
+              <% if review.image.attached? %>
+                <%= link_to(image_tag(review.image, size: "200x200"), review_path(review), class: "d-block") %>
+              <% else %>
+                <%= link_to(image_tag('no_image', size: "200x200"), review_path(review), class: "d-block") %>
+              <% end %>
+            </div>
+            <div class="col-md-8">
+              <div>
+                <%= link_to review_path(review) do %>
+                  <span class="font-weight-bold" style="font-size: 1.5rem;"><%= review.name %></span>
+                <% end %>
+              </div>
+              <div class="mt-4">
+                <strong>球場名:</strong> <span class="font-weight-bold"><%= review.ballpark.name %></span>
+              </div>
+              <div class="mt-3">
+                <strong>価格:</strong> <span class="font-weight-bold"><%= number_with_delimiter(review.price) %>円</span>
+              </div>
+              <div class="mt-3">
+                <strong>評価:</strong> <span class="font-weight-bold mb"><%= star_rating(review.rating) %></span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <div>
-            <%= link_to review_path(review) do %>
-              <span class="font-weight-bold" style="font-size: 1.5rem;"><%= review.name %></span>
-            <% end %>
-          </div>
-          <div class="mt-4">
-            <strong>球場名:</strong> <span class="font-weight-bold"><%= review.ballpark.name %></span>
-          </div>
-          <div class="mt-3">
-            <strong>価格:</strong> <span class="font-weight-bold"><%= number_with_delimiter(review.price) %>円</span>
-          </div>
-          <div class="mt-3">
-            <strong>評価:</strong> <span class="font-weight-bold mb"><%= star_rating(review.rating) %></span>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
-
-<style>
-  .table-height td {
-    padding: 20px; /* 適宜調整してください */
-  }
-
-  .review-item {
-    border: 1px solid #dee2e6;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-</style>

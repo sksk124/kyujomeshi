@@ -1,9 +1,18 @@
-<h3>会員情報編集</h3>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h3 class="text-center mb-4">球場情報編集</h3>
 
-<%= form_with model: @ballpark, url: admin_ballpark_path do |f| %>
+        <%= form_with model: @ballpark, url: admin_ballpark_path do |f| %>
+          <div class="form-group">
+            <%= f.label "球場名" %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
 
-<%= f.text_field :name %>
-
-<%= f.submit '保存' %>
-
-<% end %>
+          <div class="text-center mb-5">
+            <%= f.submit '保存', class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
