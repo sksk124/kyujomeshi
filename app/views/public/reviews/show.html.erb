@@ -96,22 +96,27 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-md-10 mt-5 mb-5">
-          <h5 class="mb-3"><strong>コメント投稿フォーム</strong></h5>
-          <%= form_with(model: Comment.new, url: comments_path, local: true) do |form| %>
-            <div class="form-group">
-              <%= form.text_area :comment, class: "form-control", rows: 3 %>
-            </div>
-            <% if current_customer.present? %>
-              <%= form.hidden_field :customer_id, value: current_customer.id %>
-                <% else %>
-                  <%= form.hidden_field :customer_id, value: 0 %>
-                    <% end %>
-                      <%= form.hidden_field :review_id, value: @review.id %>
-                        <%= form.submit "コメントを投稿する", class: "btn btn-primary" %>
-                          <% end %>
-        </div>
+  <div class="col-md-10 mt-5 mb-5">
+    <h5 class="mb-3"><strong>コメント投稿フォーム</strong></h5>
+    <%= form_with(model: Comment.new, url: comments_path, local: true) do |form| %>
+      <div class="form-group">
+        <%= form.text_area :comment, class: "form-control", rows: 3 %>
       </div>
+      <% if current_customer.present? %>
+        <%= form.hidden_field :customer_id, value: current_customer.id %>
+      <% else %>
+        <%= form.hidden_field :customer_id, value: 0 %>
+      <% end %>
+      <% if current_customer.present? && current_customer.email == "guest@example.com" %>
+        <%= form.submit "ゲストユーザーはコメントできません", class: "btn btn-primary", disabled: true %>
+      <% else %>
+        <%= form.hidden_field :review_id, value: @review.id %>
+        <%= form.submit "コメントを投稿する", class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
     </div>
   </div>
 </div>
