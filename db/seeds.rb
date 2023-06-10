@@ -9,7 +9,7 @@
 # db/seeds.rb
 customers = Customer.create!(
   [
-    { last_name: '管理者', first_name: '管理者', last_name_kana: 'カンリシャ', first_name_kana: 'カンリシャ', email: 'admin@example.com', password: '01248929', nick_name: '管理者', is_deleted: false },
+    { last_name: '管理者', first_name: '管理者', last_name_kana: 'カンリシャ', first_name_kana: 'カンリシャ', email: 'admin2@example.com', password: '01248929', nick_name: '管理者', is_deleted: false },
     { last_name: '球場', first_name: '太郎', last_name_kana: 'キュウジョウ', first_name_kana: 'タロウ', email: 'kyujo1@example.com', password: '12345678', nick_name: '球場くん', is_deleted: false },
     { last_name: '球場', first_name: '花子', last_name_kana: 'キュウジョウ', first_name_kana: 'ハナコ', email: 'kyujo2@example.com', password: '23456789', nick_name: '球場さん', is_deleted: false },
   ]
