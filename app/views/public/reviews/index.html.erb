@@ -38,7 +38,7 @@
                     <% end %>
                 </div>
                 <div class="mt-3">
-                  <% if review.customer.id == 0 %> <strong>投稿者:</strong>
+                  <% if review.customer.id == 1 %> <strong>投稿者:</strong>
                     <%= link_to "#{review.customer.nick_name}", reviews_path(customer_id: review.customer.id) %>
                       <% elsif review.customer.present? %>
                         <p><strong>投稿者:</strong>
