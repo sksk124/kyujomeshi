@@ -1,16 +1,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-2">
-      <nav class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <h4 class="mt-5"><strong>球場一覧</strong></h4>
-          <% @ballparks.each do |ballpark| %>
-            <li class="nav-item mt-3">
-              <%= link_to ballpark.name, reviews_path(ballpark_id: ballpark.id) %>
-            </li>
-            <% end %>
-        </ul>
-      </nav>
+      <%= render 'public/list', ballpark: @ballpark %>
     </div>
     <div class="col-md-10">
       <div class="row justify-content-center">
@@ -19,44 +10,55 @@
         </div>
         <div class="col-md-5 mt-5">
           <div>
-            <h4 class="mb-4"><strong><%= @review.name %></strong></h4>
+            <h4 class="mb-4">
+              <strong>
+                <%= @review.name %>
+              </strong>
+            </h4>
             <p>
-              <% if @review.customer.id == 1 %> <strong>投稿者:</strong>
-                <%= link_to "#{@review.customer.nick_name}", reviews_path(customer_id: @review.customer.id) %>
-                  <% elsif @review.customer.present? %>
-                    <p><strong>投稿者:</strong>
-                      <%= link_to "#{@review.customer.nick_name}さん", reviews_path(customer_id: @review.customer.id) %>
-                        <% end %>
-                    </p>
-                    <p><strong>投稿日時:</strong>
-                      <%= @review.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
-                    </p>
-                    <p><strong>価格:</strong>
-                      <%= number_with_delimiter(@review.price) %>円</p>
-                    <p><strong>評価:</strong>
-                      <%= star_rating(@review.rating) %>
-                    </p>
-                    <% if current_customer == @review.customer %>
-                      <div class="mt-3">
-                        <div class="dropdown"> <button class="btn btn-secondary dropdown-toggle" type="button" id="reviewActionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    編集
-                                </button>
-                          <div class="dropdown-menu" aria-labelledby="reviewActionsDropdown">
-                            <%= link_to "編集", edit_review_path(@review), class: "dropdown-item" %>
-                              <%= button_to "削除", @review, method: :delete, data: {confirm: "本当に削除しますか？" }, class: "dropdown-item", form: {class: "d-inline" } %>
-                          </div>
-                        </div>
-                      </div>
-                      <% end %>
+            <% if @review.customer.id == 1 %>
+            <strong>投稿者:</strong>
+            <%= link_to "#{@review.customer.nick_name}", reviews_path(customer_id: @review.customer.id) %>
+            <% elsif @review.customer.present? %>
+            <p>
+            <strong>投稿者:</strong>
+            <%= link_to "#{@review.customer.nick_name}さん", reviews_path(customer_id: @review.customer.id) %>
+            <% end %>
+            </p>
+            <p>
+            <strong>投稿日時:</strong>
+            <%= @review.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
+            </p>
+            <p>
+            <strong>価格:</strong>
+            <%= number_with_delimiter(@review.price) %>円
+            </p>
+            <p>
+            <strong>評価:</strong>
+            <%= star_rating(@review.rating) %>
+            </p>
+            <% if current_customer == @review.customer %>
+            <div class="mt-3">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="reviewActionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">編集 </button>
+                <div class="dropdown-menu" aria-labelledby="reviewActionsDropdown">
+                  <%= link_to "編集", edit_review_path(@review), class: "dropdown-item" %>
+                  <%= button_to "削除", @review, method: :delete, data: {confirm: "本当に削除しますか？" }, class: "dropdown-item", form: {class: "d-inline" } %>
+                </div>
+              </div>
+            </div>
+            <% end %>
           </div>
         </div>
       </div>
       <div class="row justify-content-center">
         <div class="col-md-10 mt-3">
-          <h5 class="mb-3"><strong>球場飯レビュー</strong></h5>
+          <h5 class="mb-3">
+            <strong>球場飯レビュー</strong>
+          </h5>
           <div class="p-4 bg-light border rounded">
             <p>
-              <%= @review.thought %>
+            <%= @review.thought %>
             </p>
           </div>
         </div>
@@ -70,53 +72,58 @@
       </style>
       <div class="row justify-content-center">
         <div class="col-md-10 mt-5">
-          <h5 class="mb-3"><strong><%= "#{@comments.count}件のコメント" %></strong></h5>
+          <h5 class="mb-3">
+            <strong>
+              <%= "#{@comments.count}件のコメント" %>
+            </strong>
+          </h5>
           <% @comments.each do |comment| %>
-            <div class="review-item mb-4">
-              <p>
-                <% if comment.customer_id == 1 %> 管理者
-                  <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
-                    <% elsif comment.customer_id.present? %>
-                      <%= link_to "#{comment.customer.nick_name}さん", reviews_path(customer_id: comment.customer.id) %>
-                        <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
-                          <% else %> Unknown User
-                            <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
-                              <% end %>
-              </p>
-              <p>
-                <%= comment.comment %>
-              </p>
-              <% if current_customer == comment.customer %>
-                <div class="text-right">
-                  <%= button_to "削除", comment_path(comment), method: :delete, data: {confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
-                </div>
-                <% end %>
+          <div class="review-item mb-4">
+            <p>
+            <% if comment.customer_id == 1 %>管理者 
+            <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+            <% elsif comment.customer_id.present? %>
+            <%= link_to "#{comment.customer.nick_name}さん", reviews_path(customer_id: comment.customer.id) %>
+            <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+            <% else %>Unknown User 
+            <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+            <% end %>
+            </p>
+            <p>
+            <%= comment.comment %>
+            </p>
+            <% if current_customer == comment.customer %>
+            <div class="text-right">
+              <%= button_to "削除", comment_path(comment), method: :delete, data: {confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
             </div>
             <% end %>
+          </div>
+          <% end %>
         </div>
       </div>
       <div class="row justify-content-center">
-  <div class="col-md-10 mt-5 mb-5">
-    <h5 class="mb-3"><strong>コメント投稿フォーム</strong></h5>
-    <%= form_with(model: Comment.new, url: comments_path, local: true) do |form| %>
-      <div class="form-group">
-        <%= form.text_area :comment, class: "form-control", rows: 3 %>
+        <div class="col-md-10 mt-5 mb-5">
+          <h5 class="mb-3">
+            <strong>コメント投稿フォーム</strong>
+          </h5>
+          <%= form_with(model: Comment.new, url: comments_path, local: true) do |form| %>
+          <div class="form-group">
+            <%= form.text_area :comment, class: "form-control", rows: 3 %>
+          </div>
+          <% if current_customer.present? %>
+          <%= form.hidden_field :customer_id, value: current_customer.id %>
+          <% else %>
+          <%= form.hidden_field :customer_id, value: 1 %>
+          <% end %>
+          <% if current_customer.present? && current_customer.email == "guest@example.com" %>
+          <%= form.submit "ゲストユーザーはコメントできません", class: "btn btn-primary", disabled: true %>
+          <% else %>
+          <%= form.hidden_field :review_id, value: @review.id %>
+          <%= form.submit "コメントを投稿する", class: "btn btn-primary" %>
+          <% end %>
+          <% end %>
+        </div>
       </div>
-      <% if current_customer.present? %>
-        <%= form.hidden_field :customer_id, value: current_customer.id %>
-      <% else %>
-        <%= form.hidden_field :customer_id, value: 1 %>
-      <% end %>
-      <% if current_customer.present? && current_customer.email == "guest@example.com" %>
-        <%= form.submit "ゲストユーザーはコメントできません", class: "btn btn-primary", disabled: true %>
-      <% else %>
-        <%= form.hidden_field :review_id, value: @review.id %>
-        <%= form.submit "コメントを投稿する", class: "btn btn-primary" %>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
     </div>
   </div>
 </div>

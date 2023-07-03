@@ -1,0 +1,11 @@
+
+ <nav class="sidebar-sticky">
+  <ul class="nav flex-column">
+   <h4 class="mt-5"><strong>球場一覧</strong></h4>
+    <% @ballparks.each do |ballpark| %>
+     <li class="nav-item mt-3">
+       <%= link_to ballpark.name, reviews_path(ballpark_id: ballpark.id) %>
+      </li>
+    <% end %>
+   </ul>
+  </nav>

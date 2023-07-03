@@ -1,49 +1,48 @@
 <div class="container">
-    <div class="row justify-content-center">
-
-        <div class="col-md-3">
-            <nav class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <h4 class="mt-5"><strong>球場一覧</strong></h4>
-                    <% @ballparks.each do |ballpark| %>
-                    <li class="nav-item mt-3">
-                        <%= link_to ballpark.name, reviews_path(ballpark_id: ballpark.id) %>
-                    </li>
-                    <% end %>
-                </ul>
-            </nav>
-        </div>
-
-
-
-   <div class="col-md-9">
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <%= render 'public/list', ballpark: @ballpark %>
+    </div>
+    <div class="col-md-9">
       <div class="text-center mt-5">
-    <%= image_tag('トップ.jpg', size: "700x450") %>
-  </div>
-  <h3 class="mt-5"><strong>球場飯一覧</strong></h3>
-  <div class="row">
-    <% @reviews.order(created_at: :desc).limit(6).each do |review| %>
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <div class="text-center mb-3">
-            <% if review.image.attached? %>
-              <%= link_to(image_tag(review.image, size: "200x200", class: "card-img-top"), review_path(review)) %>
-            <% else %>
-              <%= link_to(image_tag('no_image', size: "200x200", class: "card-img-top"), review_path(review)) %>
-            <% end %>
+        <%= image_tag('トップ.jpg', size: "700x450") %>
+      </div>
+      <h3 class="mt-5">
+        <strong>球場飯一覧</strong>
+      </h3>
+      <div class="row">
+        <% @reviews.order(created_at: :desc).limit(6).each do |review| %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <% if review.image.attached? %>
+                <%= link_to(image_tag(review.image, size: "200x200", class: "card-img-top"), review_path(review)) %>
+                <% else %>
+                <%= link_to(image_tag('no_image', size: "200x200", class: "card-img-top"), review_path(review)) %>
+                <% end %>
+              </div>
+              <div class="mb-2">
+                <strong>球場名:</strong>
+                <%= review.ballpark.name %>
+              </div>
+              <div class="mb-2">
+                <strong>商品名:</strong>
+                <%= review.name %>
+              </div>
+              <div class="mb-2">
+                <strong>価格:</strong>
+                <%= number_with_delimiter(review.price) %>円
+              </div>
+              <div class="mb-2">
+                <strong>評価:</strong>
+                <%= star_rating(review.rating) %>
+              </div>
+            </div>
           </div>
-          <div class="mb-2"><strong>球場名:</strong> <%= review.ballpark.name %></div>
-          <div class="mb-2"><strong>商品名:</strong> <%= review.name %></div>
-          <div class="mb-2"><strong>価格:</strong> <%= number_with_delimiter(review.price) %>円</div>
-          <div class="mb-2"><strong>評価:</strong> <%= star_rating(review.rating) %></div>
         </div>
+        <% end %>
       </div>
     </div>
-    <% end %>
   </div>
 </div>
-
-
-    </div>
-  </div>
