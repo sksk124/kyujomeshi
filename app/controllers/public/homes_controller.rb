@@ -2,7 +2,7 @@ class Public::HomesController < ApplicationController
   before_action :authenticate_customer!, except: [:top, :about, :guest_sign_in]
 
   def top
-     @reviews = Review.all
+    @reviews = Review.all
 
   # 名前による検索
    if params[:search].present?
@@ -28,7 +28,7 @@ class Public::HomesController < ApplicationController
     end
    end
 
-   @ballparks = Ballpark.all
+    @ballparks = Ballpark.all
   end
 
   def about
@@ -37,17 +37,16 @@ class Public::HomesController < ApplicationController
   def guest_sign_in
   customer = Customer.find_or_create_by!(email: 'guest@example.com') do |customer|
     customer.password = SecureRandom.urlsafe_base64
-    customer.last_name = 'Guest' # 姓を設定する（任意の値に置き換えてください）
-    customer.first_name = 'User' # 名を設定する（任意の値に置き換えてください）
-    customer.last_name_kana = 'ゲスト' # 姓カナを設定する（任意の値に置き換えてください）
-    customer.first_name_kana = 'ユーザー' # 名カナを設定する（任意の値に置き換えてください）
-    customer.nick_name = 'Guest User' # ニックネームを設定する（任意の値に置き換えてください）
-    # 必要に応じて他の属性も設定します
+    customer.last_name = 'Guest' # 姓を設定
+    customer.first_name = 'User' # 名を設定
+    customer.last_name_kana = 'ゲスト' # 姓カナを設定
+    customer.first_name_kana = 'ユーザー' # 名カナを設定
+    customer.nick_name = 'Guest User' # ニックネームを設定
   end
 
   sign_in(customer)
   redirect_to reviews_path, notice: 'ゲストユーザーとしてログインしました。'
-end
+  end
 
 
 
