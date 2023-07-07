@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-    <html>
-        <head>
-            <title>Kyujomeshi</title>
-            <meta name="viewport" content="width=device-width,initial-scale=1">
-                <%= csrf_meta_tags %>
-                <%= csp_meta_tag %>
-                <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-                <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-                <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-                <style>
+<html>
+  <head>
+    <title>Kyujomeshi</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
     .footer-divider {
       border-top: 1px solid #ccc;
     }
@@ -17,150 +16,86 @@
       border-bottom: 1px solid #ccc;
     }
   </style>
-
-
-
-        </head>
-
-        <body>
-            <header class="header-divider">
-            <nav class="navbar navbar-expand-xl navbar-light">
-    <a class="navbar-brand p-4 text-right ml-5" href="/">
-        <%= image_tag('IMG_7256.PNG', size: "100x50") %>
-    </a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto mr-0">
-                        <li class="nav-item">
-                            <div class="row justify-content-end">
-                                <div class="col-auto">
-                                    <ul class="navbar-nav">
-                                        <% if customer_signed_in? %>
-                                        <% unless current_customer.email == 'guest@example.com' %>
-                                        <li class="nav-item">
-                                            <%= link_to "球場飯を投稿する", new_review_path, class: "nav-link btn btn-link font-weight-bold text-primary" %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "マイページ", customer_path(current_customer), class: "nav-link btn btn-link" %>
-                                        </li>
-                                        <% end %>
-                                        <li class="nav-item">
-                                            <%= link_to "球場飯一覧", reviews_path, class: "nav-link btn btn-link" %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-link", data: {confirm: "ログアウトしますか？" } %>
-                                        </li>
-                                        <% elsif admin_signed_in? %>
-                                        <li class="nav-item">
-                                            <%= link_to "球場飯を投稿する", new_admin_review_path, class: "nav-link btn btn-link font-weight-bold text-primary" %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "球場飯一覧", admin_reviews_path, class: "nav-link btn btn-link" %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "会員一覧", admin_customers_path, class: "nav-link btn btn-link" %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "球場画面", admin_ballparks_path, class: "nav-link btn btn-link" %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-link", data: {confirm: "ログアウトしますか？" } %>
-                                        </li>
-                                        <% else %>
-                                        <li class="nav-item">
-                                        <%= link_to 'ゲストログイン', guest_sign_in_public_homes_path, method: :post, class: "nav-link btn btn-link" %>
-
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "会員登録", new_customer_registration_path, class: "nav-link btn btn-link" %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "ログイン", new_customer_session_path, class: "nav-link btn btn-link" %>
-                                        </li>
-                                        <% end %>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-end">
-                                <div class="col-auto">
-                                    <form class="mt-3">
-                                        <div class="form-row">
-                                            <div class="col-auto">
-                                                <div class="form-group">
-                                                    <select name="rating" class="form-control mb-2">
-                                                        <option value="">評価を選択</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <div class="form-group">
-                                                    <select name="price" class="form-control mb-2">
-                                                        <option value="">金額を選択</option>
-                                                        <option value="1">~999</option>
-                                                        <option value="2">1000~1999</option>
-                                                        <option value="3">2000~2999</option>
-                                                        <option value="4">3000~</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <div class="form-group">
-                                                    <input class="form-control" type="search" name="search" placeholder="レビューを検索">
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button class="btn btn-outline-success" type="submit">検索</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-
-                        </li>
-                    </ul>
+  </head>
+  <body>
+    <header class="header-divider">
+      <nav class="navbar navbar-expand-xl navbar-light">
+        <a class="navbar-brand p-4 text-right ml-5" href="/">
+          <%= image_tag('IMG_7256.PNG', size: "100x50") %>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto mr-0">
+            <li class="nav-item">
+              <div class="row justify-content-end">
+                <div class="col-auto">
+                  <ul class="navbar-nav">
+                    <% if customer_signed_in? %>
+                    <% unless current_customer.email == 'guest@example.com' %>
+                    <li class="nav-item">
+                      <%= link_to "球場飯を投稿する", new_review_path, class: "nav-link btn btn-link font-weight-bold text-primary" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "マイページ", customer_path(current_customer), class: "nav-link btn btn-link" %>
+                    </li>
+                    <% end %>
+                    <li class="nav-item">
+                      <%= link_to "球場飯一覧", reviews_path, class: "nav-link btn btn-link" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-link", data: {confirm: "ログアウトしますか？" } %>
+                    </li>
+                    <% elsif admin_signed_in? %>
+                    <li class="nav-item">
+                      <%= link_to "球場飯を投稿する", new_admin_review_path, class: "nav-link btn btn-link font-weight-bold text-primary" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "球場飯一覧", admin_reviews_path, class: "nav-link btn btn-link" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "会員一覧", admin_customers_path, class: "nav-link btn btn-link" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "球場画面", admin_ballparks_path, class: "nav-link btn btn-link" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-link", data: {confirm: "ログアウトしますか？" } %>
+                    </li>
+                    <% else %>
+                    <li class="nav-item">
+                      <%= link_to 'ゲストログイン', guest_sign_in_public_homes_path, method: :post, class: "nav-link btn btn-link" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "会員登録", new_customer_registration_path, class: "nav-link btn btn-link" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "ログイン", new_customer_session_path, class: "nav-link btn btn-link" %>
+                    </li>
+                    <% end %>
+                  </ul>
                 </div>
-
-
-
-            </nav>
-            </header>
-
-            <main>
-            <div class="text-center mt-3 mb-3">
-                <%= flash[:success] %>
-            </div>
-            </main>
-
-
-
-
-            <%= yield %>
-
-
-<footer class="footer-divider" style="padding: 20px 0;">
-  <div class="container-fluid">
-    <p class="text-center">&copy; 2023 球場飯. All rights reserved.</p>
-    <p class="text-center">
-      <a href="/" class="text-muted">トップページ</a> |
-      <a href="<%= about_path %>" class="text-muted">アバウトページ</a>
-    </p>
-  </div>
-</footer>
-
-
-
-
-        </body>
-    </html>
-
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="text-center mt-3 mb-3">
+        <%= flash[:success] %>
+      </div>
+    </main>
+    <%= yield %>
+    <footer class="footer-divider" style="padding: 20px 0;">
+      <div class="container-fluid">
+        <p class="text-center">&copy; 2023 球場飯. All rights reserved.</p>
+        <p class="text-center">
+          <a href="/" class="text-muted">トップページ</a>|
+          <a href="<b3bbae0f35a585bd3f7c2ccd512fb6a0 />" class="text-muted">アバウトページ</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
