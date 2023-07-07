@@ -38,25 +38,28 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdraw
-  # フォームから送信されたパスワードとパスワード確認用の値を取得する
-  password = params[:password]
-  password_confirmation = params[:password_confirmation]
- # パスワードとパスワード確認用の値が一致しているかを確認する
-   if password == password_confirmation
-    # 論理削除のため、is_deletedカラムをtrueに更新する
+    # フォームから送信されたパスワードとパスワード確認用の値を取得
+    password = params[:password]
+    password_confirmation = params[:password_confirmation]
+    
+    # パスワードとパスワード確認用の値が一致しているかを確認
+    if password == password_confirmation
+     
+    # 論理削除のため、is_deletedカラムをtrueに更新
     current_customer.update(is_deleted: true)
-
+    
     # ログアウトさせる
     reset_session
-
+    
     # 退会が完了した旨のメッセージを表示し、トップページへリダイレクトする
     flash[:notice] = "退会が完了しました。ご利用ありがとうございました。"
     redirect_to top_path
-   else
+    
+    else
     # パスワードとパスワード確認用の値が一致しない場合はエラーメッセージを表示する
     flash.now[:alert] = "パスワードとパスワード確認用の値が一致しません。"
     redirect_to customers_my_page_path
-   end
+    end
   end
   
   

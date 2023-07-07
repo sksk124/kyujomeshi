@@ -48,8 +48,4 @@ class Public::HomesController < ApplicationController
   redirect_to reviews_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
-
-
-
-
 end

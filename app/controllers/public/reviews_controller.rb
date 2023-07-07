@@ -34,12 +34,10 @@ class Public::ReviewsController < ApplicationController
      @reviews = @reviews.where(ballpark_id: params[:ballpark_id])
    end
 
-
    # 投稿者での絞り込み
    if params[:customer_id].present?
      @reviews = @reviews.where(customer_id: params[:customer_id])
    end
-
 
    @ballparks = Ballpark.all
   end
@@ -53,7 +51,6 @@ class Public::ReviewsController < ApplicationController
    if params[:customer_id].present?
      @reviews = @reviews.where(customer_id: params[:customer_id])
    end
-
   end
 
   def edit
@@ -63,7 +60,6 @@ class Public::ReviewsController < ApplicationController
   end
 
   def update
-
     if @review.update(review_params)
       redirect_to @review
     else
@@ -91,8 +87,6 @@ class Public::ReviewsController < ApplicationController
     review.destroy
     redirect_to reviews_path
   end
-
-
 
 
   private
