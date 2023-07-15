@@ -1,2 +1,30 @@
 @use '~bootstrap/scss/bootstrap';
 @use '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.footer-divider {
+  border-top: 1px solid #ccc;
+}
+.header-divider {
+  border-bottom: 1px solid #ccc;
+}
+
+.table-height td {
+  padding: 20px;
+}
+
+.review-item {
+  border: 1px solid #dee2e6;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.img-small {
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.table td,
+.table th {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
