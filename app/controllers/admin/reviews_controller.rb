@@ -9,7 +9,6 @@ class Admin::ReviewsController < ApplicationController
   def show
     @ballparks = Ballpark.all
     @comments = @review.comments
-
     # 投稿者での絞り込み
     if params[:customer_id].present?
       @reviews = @reviews.where(customer_id: params[:customer_id])
@@ -23,10 +22,10 @@ class Admin::ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     if @review.save
-      flash[:success] = 'レビューを投稿しました'
+      flash[:success] = "球場飯を投稿しました"
       redirect_to admin_reviews_path
     else
-      flash.now[:danger] = 'レビューの投稿に失敗しました'
+      flash.now[:error] = "球場飯の投稿に失敗しました"
       render :new
     end
   end
@@ -37,11 +36,21 @@ class Admin::ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      redirect_to admin_review_path(@review), notice: "レビューが更新されました。"
+      flash[:success] = "球場飯を更新しました"
+      redirect_to admin_review_path(@review)
     else
+      flash[:error] = "球場飯の更新に失敗しました"
       render :edit
     end
   end
+
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    flash[:success] = "球場飯を削除しました"
+    redirect_to admin_reviews_path
+  end
+
 
   private
 
