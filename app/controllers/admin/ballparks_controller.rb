@@ -13,9 +13,12 @@ class Admin::BallparksController < ApplicationController
   def create
     @ballpark = Ballpark.new(ballpark_params)
     if @ballpark.save
-      redirect_to admin_ballparks_path, notice: '新しい球場を登録しました'
+      flash[:success] = "新しい球場を登録しました"
+      redirect_to admin_ballparks_path
     else
-      render :new
+      flash[:error] = "球場の登録に失敗しました"
+      @ballparks = Ballpark.all
+      render :index
     end
   end
 
