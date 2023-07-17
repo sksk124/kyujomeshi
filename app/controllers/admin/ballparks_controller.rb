@@ -18,7 +18,7 @@ class Admin::BallparksController < ApplicationController
     else
       flash[:error] = "球場の登録に失敗しました"
       @ballparks = Ballpark.all
-      render :index
+      render :new
     end
   end
 
