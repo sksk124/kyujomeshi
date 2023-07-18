@@ -15,8 +15,7 @@ class Public::CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    review = @comment.review # 削除後のリダイレクト先のために関連するレビューを取得する
-
+    review = @comment.review
     if @comment.destroy
       flash[:success] = "コメントを削除しました"
     else
