@@ -75,10 +75,10 @@ class Public::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.customer = current_customer
    if @review.save
-    flash[:success] = 'レビューを投稿しました'
+    flash[:success] = "球場飯を投稿しました"
     redirect_to reviews_path
    else
-    Rails.logger.error @review.errors.full_messages.join(', ')
+    flash.now[:error] = "球場飯の投稿に失敗しました"
     render :new
    end
   end
