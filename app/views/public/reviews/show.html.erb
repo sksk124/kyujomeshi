@@ -5,8 +5,8 @@
     </div>
     <div class="col-md-10">
       <div class="row justify-content-center">
-        <div class="col-md-5 mt-5">
-          <%= image_tag @review.image, size: "300x300", class: "img-fluid" if @review.image.attached? %>
+        <div class="col-md-5 mt-5 text-center">
+          <%= image_tag @review.image, class: "index-img" if @review.image.attached? %>
         </div>
         <div class="col-md-5 mt-5">
           <div>

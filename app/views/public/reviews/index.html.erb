@@ -54,7 +54,7 @@
           <div class="row">
             <div class="col-md-4">
               <% if review.image.attached? %>
-              <%= link_to(image_tag(review.image, size: "200x200"), review_path(review), class: "d-block") %>
+              <%= link_to(image_tag(review.image, class: "index-img"), review_path(review), class: "d-block") %>
               <% else %>
               <%= link_to(image_tag('no_image', size: "200x200"), review_path(review), class: "d-block") %>
               <% end %>
