@@ -3,7 +3,7 @@ class Public::ReviewsController < ApplicationController
   before_action :is_matching_login_customer, only: [:edit, :update, :destroy]
 
   def index
-   @reviews = Review.order(created_at: :desc)
+   @reviews = Review.order(created_at: :desc).page(params[:page]).per(10)
 
   # 名前による検索
    if params[:search].present?
