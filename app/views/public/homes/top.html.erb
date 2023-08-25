@@ -8,7 +8,7 @@
         <%= image_tag('グルメ.jpg', size: "650x400") %>
       </div>
       <h3 class="mt-5">
-        <strong>球場飯一覧</strong>
+        <a href="/reviews" class="text-dark">球場飯一覧</strong>
       </h3>
       <div class="row">
         <% @reviews.order(created_at: :desc).limit(6).each do |review| %>
