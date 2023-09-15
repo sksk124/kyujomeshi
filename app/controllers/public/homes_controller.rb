@@ -11,7 +11,7 @@ class Public::HomesController < ApplicationController
 
   def guest_sign_in
   customer = Customer.find_or_create_by!(email: 'guest@example.com') do |customer| # guest@example.comをゲストログインのアドレスに設定
-    customer.password = SecureRandom.urlsafe_base64 # ランダムでパスワードを
+    customer.password = SecureRandom.urlsafe_base64 # ランダムでパスワードを設定
     customer.last_name = 'Guest' # 姓を設定
     customer.first_name = 'User' # 名を設定
     customer.last_name_kana = 'ゲスト' # 姓カナを設定
